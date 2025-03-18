@@ -12,4 +12,5 @@ export { ProductsGroupList } from "./products-group-list";
 export { PizzaImage } from "./pizza-image";
 export { GroupVariants } from "./group-variants";
 export { IngredientItem } from "./ingredient-item";
+export { CartDrawer } from "./cart-drawer";
 export * from "./modals";
