@@ -37,12 +37,12 @@
     "react-hot-toast": "^2.5.2",
     "react-use": "^17.6.0",
     "tailwind-merge": "^3.0.2",
-    "ts-node": "^10.9.2",
     "use-sync-external-store": "^1.4.0",
     "vaul": "^1.1.2",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "ts-node": "^10.9.2",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.0.9",
     "@types/node": "^20",
