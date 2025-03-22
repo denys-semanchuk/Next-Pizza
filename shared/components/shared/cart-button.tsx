@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/shared/lib/utils';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '../ui';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import { CartDrawer } from './cart-drawer';
@@ -12,11 +12,33 @@ interface Props {
 }
 
 export const CartButton: React.FC<Props> = ({ className }) => {
-  const [totalAmount, items, loading] = useCartStore((state) => [
-    state.totalAmount,
-    state.items,
-    state.loading,
-  ]);
+  const [hydrated, setHydrated] = useState(false);
+  
+  const totalAmount = useCartStore(state => state.totalAmount);
+  const items = useCartStore(state => state.items);
+  const loading = useCartStore(state => state.loading);
+  
+  useEffect(() => {
+    useCartStore.persist.rehydrate();
+    setHydrated(true);
+  }, []);
+
+  if (!hydrated) {
+    return (
+      <CartDrawer>
+        <Button
+          loading={true}
+          className={cn('group relative w-[105px]', className)}>
+          <b>0 ₽</b>
+          <span className="h-full w-[1px] bg-white/30 mx-3" />
+          <div className="flex items-center gap-1">
+            <ShoppingCart size={16} className="relative" strokeWidth={2} />
+            <b>0</b>
+          </div>
+        </Button>
+      </CartDrawer>
+    );
+  }
 
   return (
     <CartDrawer>
