@@ -1,67 +1,53 @@
-import React from 'react'
-import { Container, Title, TopBar, Filters, ProductsGroupList } from '@/shared/components/shared'
-import { prisma } from '@/prisma/prisma-client'
-import { Suspense } from 'react'
-import { Ingredient } from '@prisma/client'
+import {
+  Container,
+  Filters,
+  Title,
+  TopBar,
+  ProductsGroupList,
+} from '@/shared/components/shared';
+import { Suspense } from 'react';
+import { GetSearchParams, findPizzas } from '@/shared/lib/find-pizzas';
 
-export default async function Page() {
-  const categories = await prisma.category.findMany({
-    include: {
-      products: {
-        include: {
-          ingredients: true,
-          productItems: true
-        }
-      }
-    }
-  })
-
-  const adaptedCategories = categories.map(category => ({
-    id: category.id,
-    name: category.name,
-    products: category.products.map(product => ({
-      id: product.id,
-      name: product.name,
-      imageUrl: product.imageUrl,
-      items: product.productItems,
-      ingredients: product.ingredients.map((ing: Ingredient) => ing.name),
-    }))
-  }));
+export default async function Home({ searchParams }: { searchParams: GetSearchParams }) {
+  searchParams = await searchParams;
+  const categories = await findPizzas(searchParams);
 
   return (
     <>
-      <Container className='mt-10'>
-        <Title text='All Pizzas' size='lg' className='font-extrabold' />
+      <Container className="mt-10">
+        <Title text="Все пиццы" size="lg" className="font-extrabold" />
       </Container>
 
-      <TopBar categories={categories.filter((cat) => cat.products.length > 0)} />
+      <TopBar categories={categories.filter((category) => category.products.length > 0)} />
 
-      <Container className='pb-14 mt-10'>
-        <div className="flex gap-[60px]">
-          {/* Filtration */}
+
+      <Container className="mt-10 pb-14">
+        <div className="flex gap-[80px]">
+          {/* Фильтрация */}
           <div className="w-[250px]">
-            <Filters />
+            <Suspense>
+              <Filters />
+            </Suspense>
           </div>
 
-          {/* Products list */}
+          {/* Список товаров */}
           <div className="flex-1">
             <div className="flex flex-col gap-16">
-              <Suspense fallback={<div>Loading products...</div>}>
-                {adaptedCategories.map(category => (
+              {categories.map(
+                (category) =>
                   category.products.length > 0 && (
                     <ProductsGroupList
                       key={category.id}
                       title={category.name}
-                      items={category.products}
                       categoryId={category.id}
+                      items={category.products}
                     />
-                  )
-                ))}
-              </Suspense>
+                  ),
+              )}
             </div>
           </div>
         </div>
       </Container>
     </>
-  )
+  );
 }
