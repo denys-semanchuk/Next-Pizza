@@ -36,13 +36,12 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     return NextResponse.json(updatedUserCart);
   } catch (error) {
     console.log('[CART_PATCH] Server error', error);
-    return NextResponse.json({ message: 'Не удалось обновить корзину' }, { status: 500 });
+    return NextResponse.json({ message: 'Failed to update cart' }, { status: 500 });
   }
 }
 
 export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const id = Number(params.id);
     const token = req.cookies.get('cartToken')?.value;
 
     if (!token) {
@@ -70,6 +69,6 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     return NextResponse.json(updatedUserCart);
   } catch (error) {
     console.log('[CART_DELETE] Server error', error);
-    return NextResponse.json({ message: 'Не удалось удалить корзину' }, { status: 500 });
+    return NextResponse.json({ message: 'Failed to delete cart' }, { status: 500 });
   }
 }
