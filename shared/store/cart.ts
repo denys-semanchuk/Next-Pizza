@@ -29,7 +29,6 @@ export const useCartStore = create<CartState>()(
         try {
           set({ loading: true, error: false });
           const data = await Api.cart.getCart();
-          console.log(data, "хуй")
           set(getCartDetails(data));
         } catch (error) {
           console.error(error);

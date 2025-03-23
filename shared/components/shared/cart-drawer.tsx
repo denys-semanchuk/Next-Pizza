@@ -64,7 +64,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
 
           {totalAmount > 0 && (
             <>
-              <div className="-mx-6 mt-5 overflow-auto flex-1">
+              <div className="mx-2 mt-5 overflow-auto flex-1">
                 {cartItems.map((item) => (
                   <div key={item.id} className="mb-2">
                     <CartDrawerItem
@@ -88,7 +88,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
                 ))}
               </div>
 
-              <SheetFooter className="-mx-6 bg-white p-8">
+              <SheetFooter className="bg-white p-8">
                 <div className="w-full">
                   <div className="flex mb-4">
                     <span className="flex flex-1 text-lg text-neutral-500">

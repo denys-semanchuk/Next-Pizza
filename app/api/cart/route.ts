@@ -38,6 +38,7 @@ export async function GET(req: NextRequest) {
       },
     });
 
+
     return NextResponse.json(userCart);
   } catch (error) {
     console.log("[CART_GET] Server error", error);
@@ -52,9 +53,11 @@ export async function POST(req: NextRequest) {
   try {
     let token = req.cookies.get("cartToken")?.value;
 
+    console.log(token)
     if (!token) {
       token = crypto.randomUUID();
     }
+
 
     const userCart = await findOrCreateCart(token);
 
