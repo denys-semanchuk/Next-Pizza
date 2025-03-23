@@ -5,7 +5,7 @@ import { CartStateItem } from '../lib/get-cart-details';
 
 type ReturnProps = {
   totalAmount: number;
-  items: CartStateItem[];
+  cartItems: CartStateItem[];
   loading: boolean;
   updateItemQuantity: (id: number, quantity: number) => void;
   removeCartItem: (id: number) => void;

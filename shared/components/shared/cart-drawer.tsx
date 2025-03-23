@@ -23,7 +23,7 @@ import { cn } from '@/shared/lib/utils';
 import { useCart } from '@/shared/hooks';
 
 export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const { totalAmount, updateItemQuantity, items, removeCartItem } = useCart();
+  const { totalAmount, updateItemQuantity, cartItems, removeCartItem } = useCart();
   const [redirecting, setRedirecting] = React.useState(false);
 
   const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
@@ -40,7 +40,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
           {totalAmount > 0 && (
             <SheetHeader>
               <SheetTitle>
-                В корзине <span className="font-bold">{items.length} товара</span>
+                В корзине <span className="font-bold">{cartItems.length} товара</span>
               </SheetTitle>
             </SheetHeader>
           )}
@@ -65,7 +65,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
           {totalAmount > 0 && (
             <>
               <div className="-mx-6 mt-5 overflow-auto flex-1">
-                {items.map((item) => (
+                {cartItems.map((item) => (
                   <div key={item.id} className="mb-2">
                     <CartDrawerItem
                       id={item.id}

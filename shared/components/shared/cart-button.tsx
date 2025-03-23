@@ -15,7 +15,7 @@ export const CartButton: React.FC<Props> = ({ className }) => {
   const [hydrated, setHydrated] = useState(false);
   
   const totalAmount = useCartStore(state => state.totalAmount);
-  const items = useCartStore(state => state.items);
+  const cartItems = useCartStore(state => state.cartItems);
   const loading = useCartStore(state => state.loading);
   
   useEffect(() => {
@@ -49,7 +49,7 @@ export const CartButton: React.FC<Props> = ({ className }) => {
         <span className="h-full w-[1px] bg-white/30 mx-3" />
         <div className="flex items-center gap-1 transition duration-300 group-hover:opacity-0">
           <ShoppingCart size={16} className="relative" strokeWidth={2} />
-          <b>{items.length}</b>
+          <b>{cartItems.length}</b>
         </div>
         <ArrowRight
           size={20}

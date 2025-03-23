@@ -9,7 +9,7 @@ export interface CartState {
   loading: boolean;
   error: boolean;
   totalAmount: number;
-  items: CartStateItem[];
+  cartItems: CartStateItem[];
 
   fetchCartItems: () => Promise<void>;
   updateItemQuantity: (id: number, quantity: number) => Promise<void>;
@@ -17,11 +17,10 @@ export interface CartState {
   removeCartItem: (id: number) => Promise<void>;
 }
 
-// Create the store with SSR-friendly configuration
 export const useCartStore = create<CartState>()(
   persist(
     (set) => ({
-      items: [],
+      cartItems: [],
       error: false,
       loading: false,
       totalAmount: 0,
@@ -30,6 +29,7 @@ export const useCartStore = create<CartState>()(
         try {
           set({ loading: true, error: false });
           const data = await Api.cart.getCart();
+          console.log(data, "хуй")
           set(getCartDetails(data));
         } catch (error) {
           console.error(error);
@@ -57,7 +57,7 @@ export const useCartStore = create<CartState>()(
           set((state) => ({
             loading: true,
             error: false,
-            items: state.items.map((item) =>
+            items: state.cartItems.map((item) =>
               item.id === id ? { ...item, disabled: true } : item
             ),
           }));
@@ -69,7 +69,7 @@ export const useCartStore = create<CartState>()(
         } finally {
           set((state) => ({
             loading: false,
-            items: state.items.map((item) => ({ ...item, disabled: false })),
+            items: state.cartItems.map((item) => ({ ...item, disabled: false })),
           }));
         }
       },
