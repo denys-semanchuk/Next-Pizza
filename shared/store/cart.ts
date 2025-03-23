@@ -56,7 +56,7 @@ export const useCartStore = create<CartState>()(
           set((state) => ({
             loading: true,
             error: false,
-            items: state.cartItems.map((item) =>
+            cartItems: state.cartItems.map((item) =>
               item.id === id ? { ...item, disabled: true } : item
             ),
           }));
