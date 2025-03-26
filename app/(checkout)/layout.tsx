@@ -1,9 +1,12 @@
-import { Container, Header } from "@/shared/components/shared";
+import { Header, Providers } from "@/shared/components/shared";
 import { Metadata } from "next";
+import Script from "next/script";
+
 export const metadata: Metadata = {
   title: "Next Pizza | Cart",
   description: "Order your favorite pizza with Next Pizza",
 };
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -11,11 +14,13 @@ export default function RootLayout({
 }>) {
   return (
     <>
+      <Script
+        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&libraries=places&language=en`}
+        strategy="beforeInteractive"
+      />
       <Header hasSearch={false} hasCart={false} />
       <main className="min-h-screen bg-[#f4f1ee]">
-        <Container>
-          {children}
-        </Container>
+        <Providers>{children}</Providers>
       </main>
     </>
   );
