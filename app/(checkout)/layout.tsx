@@ -20,7 +20,7 @@ export default function RootLayout({
       />
       <Header hasSearch={false} hasCart={false} />
       <main className="min-h-screen bg-[#f4f1ee]">
-        <Providers>{children}</Providers>
+        {children}
       </main>
     </>
   );

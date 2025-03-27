@@ -4,7 +4,7 @@ import { prisma } from '@/prisma/prisma-client';
 import { PayOrderTemplate, VerificationUserTemplate } from '@/shared/components/shared/email-templates';
 import { CheckoutFormValues } from '@/shared/constants';
 import { createPayment, sendEmail, getUserSession } from '@/shared/lib';
-import { OrderStatus, Prisma, User } from '@prisma/client';
+import { OrderStatus, Prisma } from '@prisma/client';
 import { hashSync } from 'bcryptjs';
 import { cookies } from 'next/headers';
 
@@ -110,8 +110,6 @@ export async function createOrder(data: CheckoutFormValues) {
       }),
     );
 
-    console.log("хуй")
-
     return paymentUrl;
   } catch (err) {
     console.log('[CreateOrder] Server error', err);
@@ -120,7 +118,7 @@ export async function createOrder(data: CheckoutFormValues) {
 
 export async function updateUserInfo(body: Prisma.UserUpdateInput) {
   try {
-    const currentUser = await getUserSession() as User;
+    const currentUser = await getUserSession();
 
     if (!currentUser) {
       throw new Error('Пользователь не найден');
