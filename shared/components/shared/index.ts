@@ -19,8 +19,8 @@ export { CheckoutSidebar } from "./checkout-sidebar";
 export { CheckoutItemDetails } from "./checkout-item-details";
 export { CheckoutItemSkeleton } from "./checkout-item-skeleton";
 export {Providers} from './providers'
-
-
+export {ProfileForm} from './profile-form'
+export {InfoBlock} from './info-block'
 export * from "./modals";
 export * from "./checkout";
 export * from "./email-templates";
