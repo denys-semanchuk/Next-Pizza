@@ -1,4 +1,4 @@
-import { Header, Providers } from "@/shared/components/shared";
+import { Header } from "@/shared/components/shared";
 import { Metadata } from "next";
 import Script from "next/script";
 
@@ -14,14 +14,12 @@ export default function RootLayout({
 }>) {
   return (
     <>
+      <Header hasSearch={false} hasCart={false} />
+      <main className="min-h-screen bg-[#f4f1ee]">{children}</main>
       <Script
         src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&libraries=places&language=en`}
         strategy="beforeInteractive"
       />
-      <Header hasSearch={false} hasCart={false} />
-      <main className="min-h-screen bg-[#f4f1ee]">
-        {children}
-      </main>
     </>
   );
 }
