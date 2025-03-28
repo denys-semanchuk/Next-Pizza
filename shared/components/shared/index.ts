@@ -21,6 +21,7 @@ export { CheckoutItemSkeleton } from "./checkout-item-skeleton";
 export {Providers} from './providers'
 export {ProfileForm} from './profile-form'
 export {InfoBlock} from './info-block'
+export {OrderItem} from './order-item'
 export * from "./modals";
 export * from "./checkout";
 export * from "./email-templates";
