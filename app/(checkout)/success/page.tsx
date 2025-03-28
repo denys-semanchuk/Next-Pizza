@@ -2,6 +2,7 @@ import { prisma } from "@/prisma/prisma-client";
 import { Ingredient } from "@prisma/client";
 import { Check } from "lucide-react";
 import { Title, OrderItem } from "@/shared/components/shared";
+import { checkPaymentAndNotify } from "@/shared/lib/create-payment";
 interface Product {
   id: number;
   name: string;
@@ -35,6 +36,10 @@ export default async function SuccessPage({
   searchParams: { session_id: string };
 }) {
   const { session_id: sessionId } = searchParams;
+
+  if (sessionId) {
+    await checkPaymentAndNotify(sessionId);
+  }
 
   const order = await prisma.order.findFirst({
     where: {

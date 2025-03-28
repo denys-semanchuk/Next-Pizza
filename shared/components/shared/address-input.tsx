@@ -19,13 +19,11 @@ export const AdressInput: React.FC<Props> = ({
     if (suggest) {
       onChange?.(suggest.label || suggest.description);
 
-      // Close the suggestions list
       if (geosuggestRef.current) {
         geosuggestRef.current.hideSuggests();
         geosuggestRef.current.blur();
         console.log('dick')
 
-        // Clear any active suggest
         geosuggestRef.current.update(suggest.label || suggest.description);
       }
     }
