@@ -31,19 +31,17 @@ interface CartItem {
   productItem: ProductItem;
 }
 
-// Use Next.js built-in PageProps type
-interface PageProps {
-  params: { [key: string]: string | string[] };
+export default async function SuccessPage({
+  searchParams,
+}: {
   searchParams: { [key: string]: string | string[] | undefined };
-}
-
-export default async function SuccessPage({ searchParams }: PageProps) {
-  // Cast to string since searchParams can be string | string[] | undefined
+}) {
   const sessionId = searchParams.session_id as string;
 
   if (sessionId) {
     await checkPaymentAndNotify(sessionId);
   }
+
 
   const order = await prisma.order.findFirst({
     where: {
