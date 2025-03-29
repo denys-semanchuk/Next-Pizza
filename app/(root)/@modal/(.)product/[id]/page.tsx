@@ -1,15 +1,13 @@
 import { ChooseProductModal } from '@/shared/components/shared';
 import { prisma } from '@/prisma/prisma-client';
 import { notFound } from 'next/navigation';
-
+type tParams = Promise<{id:string}>
 interface Props {
-  params: {
-    id: string;
-  };
+  params: tParams
 }
 
 export default async function ProductModalPage(props: Props) {
-  const { id } = props.params;
+  const { id } = await props.params;
   
   const product = await prisma.product.findFirst({
     where: {

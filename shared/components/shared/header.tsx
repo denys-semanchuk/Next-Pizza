@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/shared/lib/utils';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Container } from './container';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -18,10 +18,8 @@ interface Props {
   className?: string;
 }
 
-export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, className }) => {
+function HeaderNotifications() {
   const router = useRouter();
-  const [openAuthModal, setOpenAuthModal] = React.useState(false);
-
   const searchParams = useSearchParams();
 
   React.useEffect(() => {
@@ -43,7 +41,13 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
         });
       }, 1000);
     }
-  }, []);
+  }, [searchParams, router]);
+
+  return null; // This component only handles side effects
+}
+
+export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, className }) => {
+  const [openAuthModal, setOpenAuthModal] = React.useState(false);
 
   return (
     <header className={cn('border-b', className)}>
@@ -74,6 +78,10 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
           {hasCart && <CartButton />}
         </div>
       </Container>
+
+      <Suspense fallback={null}>
+        <HeaderNotifications />
+      </Suspense>
     </header>
   );
 };

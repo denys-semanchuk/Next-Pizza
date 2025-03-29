@@ -30,18 +30,16 @@ interface CartItem {
   ingredients: Ingredient[];
   productItem: ProductItem;
 }
+type tSearchParams = Promise<{
+  session_id?: string;}>
 
-export default async function SuccessPage({
-  searchParams,
-}: {
-  searchParams: { session_id?:string};
-}) {
-  const sessionId = await searchParams.session_id as string;
+export default async function SuccessPage(props: {searchParams: tSearchParams}) {
+  const searchParams = await props.searchParams;
 
+  const sessionId = searchParams.session_id || null;
   if (sessionId) {
     await checkPaymentAndNotify(sessionId);
   }
-
 
   const order = await prisma.order.findFirst({
     where: {
@@ -84,7 +82,7 @@ export default async function SuccessPage({
           <div className="md:col-span-2">
             <h2 className="text-xl font-semibold mb-4">Состав заказа:</h2>
             <div className="space-y-4">
-            {items.map((item) => (
+              {items.map((item) => (
                 <OrderItem key={item.id} item={item} />
               ))}
             </div>

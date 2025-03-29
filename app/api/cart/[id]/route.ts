@@ -1,15 +1,19 @@
-import { prisma } from '@/prisma/prisma-client';
-import { updateCartTotalAmount } from '@/shared/lib/update-cart-total-amount';
-import { NextRequest, NextResponse } from 'next/server';
-
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+import { prisma } from "@/prisma/prisma-client";
+import { updateCartTotalAmount } from "@/shared/lib/update-cart-total-amount";
+import { NextRequest, NextResponse } from "next/server";
+type tParams = Promise<{ id: string }>;
+interface Props {
+  params: tParams;
+}
+export async function PATCH(req: NextRequest, { params }: Props) {
   try {
-    const id = Number(params.id);
+    const { id: sId } = await params;
+    const id = Number(sId);
     const data = (await req.json()) as { quantity: number };
-    const token = req.cookies.get('cartToken')?.value;
+    const token = req.cookies.get("cartToken")?.value;
 
     if (!token) {
-      return NextResponse.json({ error: 'Cart token not found' });
+      return NextResponse.json({ error: "Cart token not found" });
     }
 
     const cartItem = await prisma.cartItem.findFirst({
@@ -19,7 +23,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     });
 
     if (!cartItem) {
-      return NextResponse.json({ error: 'Cart item not found' });
+      return NextResponse.json({ error: "Cart item not found" });
     }
 
     await prisma.cartItem.update({
@@ -35,32 +39,40 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 
     return NextResponse.json(updatedUserCart);
   } catch (error) {
-    console.log('[CART_PATCH] Server error', error);
-    return NextResponse.json({ message: 'Failed to update cart' }, { status: 500 });
+    console.log("[CART_PATCH] Server error", error);
+    return NextResponse.json(
+      { message: "Failed to update cart" },
+      { status: 500 }
+    );
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(
+  req: NextRequest,
+  { params }: Props
+) {
   try {
-    const token = req.cookies.get('cartToken')?.value;
+    const { id: sId } = await params;
+    const id = Number(sId);
+    const token = req.cookies.get("cartToken")?.value;
 
     if (!token) {
-      return NextResponse.json({ error: 'Cart token not found' });
+      return NextResponse.json({ error: "Cart token not found" });
     }
 
     const cartItem = await prisma.cartItem.findFirst({
       where: {
-        id: Number(params.id),
+        id,
       },
     });
 
     if (!cartItem) {
-      return NextResponse.json({ error: 'Cart item not found' });
+      return NextResponse.json({ error: "Cart item not found" });
     }
 
     await prisma.cartItem.delete({
       where: {
-        id: Number(params.id),
+        id,
       },
     });
 
@@ -68,7 +80,10 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
 
     return NextResponse.json(updatedUserCart);
   } catch (error) {
-    console.log('[CART_DELETE] Server error', error);
-    return NextResponse.json({ message: 'Failed to delete cart' }, { status: 500 });
+    console.log("[CART_DELETE] Server error", error);
+    return NextResponse.json(
+      { message: "Failed to delete cart" },
+      { status: 500 }
+    );
   }
 }
