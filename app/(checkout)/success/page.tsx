@@ -3,6 +3,7 @@ import { Ingredient } from "@prisma/client";
 import { Check } from "lucide-react";
 import { Title, OrderItem } from "@/shared/components/shared";
 import { checkPaymentAndNotify } from "@/shared/lib/create-payment";
+
 interface Product {
   id: number;
   name: string;
@@ -30,12 +31,15 @@ interface CartItem {
   productItem: ProductItem;
 }
 
-export default async function SuccessPage({
-  searchParams,
-}: {
-  searchParams: { session_id: string };
-}) {
-  const { session_id: sessionId } = searchParams;
+// Use Next.js built-in PageProps type
+interface PageProps {
+  params: { [key: string]: string | string[] };
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default async function SuccessPage({ searchParams }: PageProps) {
+  // Cast to string since searchParams can be string | string[] | undefined
+  const sessionId = searchParams.session_id as string;
 
   if (sessionId) {
     await checkPaymentAndNotify(sessionId);
@@ -61,7 +65,6 @@ export default async function SuccessPage({
   }
 
   const items: CartItem[] = JSON.parse(String(order.items));
-
 
   return (
     <div className="container mx-auto p-6">
