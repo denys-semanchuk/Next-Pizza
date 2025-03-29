@@ -34,9 +34,9 @@ interface CartItem {
 export default async function SuccessPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: { session_id?:string};
 }) {
-  const sessionId = searchParams.session_id as string;
+  const sessionId = await searchParams.session_id as string;
 
   if (sessionId) {
     await checkPaymentAndNotify(sessionId);
