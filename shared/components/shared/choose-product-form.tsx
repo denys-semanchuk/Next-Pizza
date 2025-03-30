@@ -13,7 +13,7 @@ interface Props {
 }
 
 /**
- * Форма выбора ПРОДУКТА
+ * Product selection form
  */
 export const ChooseProductForm: React.FC<Props> = ({
   name,

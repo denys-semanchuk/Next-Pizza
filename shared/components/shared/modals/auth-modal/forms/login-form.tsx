@@ -32,14 +32,14 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
         throw Error();
       }
 
-      toast.success('Вы успешно вошли в аккаунт', {
+      toast.success('You have successfully signed in', {
         icon: '✅',
       });
 
       onClose?.();
     } catch (error) {
       console.error('Error [LOGIN]', error);
-      toast.error('Не удалось войти в аккаунт', {
+      toast.error('Failed to sign in', {
         icon: '❌',
       });
     }
@@ -50,17 +50,17 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
       <form className="flex flex-col gap-5" onSubmit={form.handleSubmit(onSubmit)}>
         <div className="flex justify-between items-center">
           <div className="mr-2">
-            <Title text="Вход в аккаунт" size="md" className="font-bold" />
-            <p className="text-gray-400">Введите свою почту, чтобы войти в свой аккаунт</p>
+            <Title text="Sign in to your account" size="md" className="font-bold" />
+            <p className="text-gray-400">Enter your email to sign in to your account</p>
           </div>
           <img src="/assets/images/phone-icon.png" alt="phone-icon" width={60} height={60} />
         </div>
 
         <FormInput name="email" label="E-Mail" required />
-        <FormInput name="password" label="Пароль" type="password" required />
+        <FormInput name="password" label="Password" type="password" required />
 
         <Button loading={form.formState.isSubmitting} className="h-12 text-base" type="submit">
-          Войти
+          Sign in
         </Button>
       </form>
     </FormProvider>

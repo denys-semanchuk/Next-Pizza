@@ -52,9 +52,9 @@ export default async function SuccessPage(props: {searchParams: tSearchParams}) 
       <div className="container mx-auto p-6 min-h-screen">
         <div className="bg-white rounded-lg shadow-lg p-6 text-center">
           <h1 className="text-2xl font-bold mb-4">
-            Не удалось найти информацию о заказе
+            Could not find order information
           </h1>
-          <p>Пожалуйста, свяжитесь с нашей службой поддержки</p>
+          <p>Please contact our customer support</p>
         </div>
       </div>
     );
@@ -69,18 +69,18 @@ export default async function SuccessPage(props: {searchParams: tSearchParams}) 
           <Check className="text-green-500 h-16 w-16" />
         </div>
         <Title
-          text="Спасибо за заказ!"
-          className=" font-bold text-center mb-2"
+          text="Thank you for your order!"
+          className="font-bold text-center mb-2"
           size="xl"
         />
 
         <p className="text-center text-gray-600 mb-6">
-          Заказ #{order.id} успешно оплачен и принят в обработку
+          Order #{order.id} has been successfully paid and is being processed
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="md:col-span-2">
-            <h2 className="text-xl font-semibold mb-4">Состав заказа:</h2>
+            <h2 className="text-xl font-semibold mb-4">Order details:</h2>
             <div className="space-y-4">
               {items.map((item) => (
                 <OrderItem key={item.id} item={item} />
@@ -89,14 +89,14 @@ export default async function SuccessPage(props: {searchParams: tSearchParams}) 
           </div>
 
           <div className="bg-gray-50 p-4 rounded-lg">
-            <h2 className="text-xl font-semibold mb-4">Информация о заказе</h2>
+            <h2 className="text-xl font-semibold mb-4">Order information</h2>
             <div className="space-y-3">
               <div>
-                <p className="text-gray-600">Имя:</p>
+                <p className="text-gray-600">Name:</p>
                 <p className="font-medium">{order.fullName}</p>
               </div>
               <div>
-                <p className="text-gray-600">Телефон:</p>
+                <p className="text-gray-600">Phone:</p>
                 <p className="font-medium">{order.phone}</p>
               </div>
               <div>
@@ -104,21 +104,21 @@ export default async function SuccessPage(props: {searchParams: tSearchParams}) 
                 <p className="font-medium">{order.email}</p>
               </div>
               <div>
-                <p className="text-gray-600">Адрес доставки:</p>
+                <p className="text-gray-600">Delivery address:</p>
                 <p className="font-medium">{order.address}</p>
               </div>
               <div>
-                <p className="text-gray-600">Дата заказа:</p>
+                <p className="text-gray-600">Order date:</p>
                 <p className="font-medium">
-                  {new Date(order.createdAt).toLocaleString("ru-RU")}
+                  {new Date(order.createdAt).toLocaleString("en-US")}
                 </p>
               </div>
 
               <hr className="my-4" />
 
               <div className="flex justify-between text-lg font-bold">
-                <span>Итого:</span>
-                <span>{order.totalAmount} ₽</span>
+                <span>Total:</span>
+                <span>{order.totalAmount} $</span>
               </div>
             </div>
           </div>

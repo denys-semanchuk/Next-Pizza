@@ -38,12 +38,11 @@ export async function GET(req: NextRequest) {
       },
     });
 
-
     return NextResponse.json(userCart);
   } catch (error) {
     console.log("[CART_GET] Server error", error);
     return NextResponse.json(
-      { message: "Не удалось получить корзину" },
+      { message: "Failed to retrieve cart" },
       { status: 500 }
     );
   }
@@ -53,11 +52,10 @@ export async function POST(req: NextRequest) {
   try {
     let token = req.cookies.get("cartToken")?.value;
 
-    console.log(token)
+    console.log(token);
     if (!token) {
       token = crypto.randomUUID();
     }
-
 
     const userCart = await findOrCreateCart(token);
 
@@ -75,7 +73,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Если товар был найден, делаем +1
+    // If the item was found, increase quantity by 1
     if (findCartItem) {
       await prisma.cartItem.update({
         where: {
@@ -104,7 +102,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.log("[CART_POST] Server error", error);
     return NextResponse.json(
-      { message: "Не удалось создать корзину" },
+      { message: "Failed to create cart" },
       { status: 500 }
     );
   }

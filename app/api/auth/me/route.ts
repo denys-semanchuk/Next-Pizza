@@ -11,7 +11,7 @@ export async function GET() {
 
     if (!session || !session.user) {
       return NextResponse.json(
-        { message: "Вы не авторизованы" },
+        { message: "You are not authorized" },
         { status: 401 }
       );
     }

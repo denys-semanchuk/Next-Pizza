@@ -17,13 +17,13 @@ export const ProfileButton: React.FC<Props> = ({ className, onClickSignIn }) => 
       {!session ? (
         <Button onClick={onClickSignIn} variant="outline" className="flex items-center gap-1">
           <User size={16} />
-          Войти
+          Sign In
         </Button>
       ) : (
         <Link href="/profile">
           <Button variant="secondary" className="flex items-center gap-2">
             <CircleUser size={18} />
-            Профиль
+            Profile
           </Button>
         </Link>
       )}

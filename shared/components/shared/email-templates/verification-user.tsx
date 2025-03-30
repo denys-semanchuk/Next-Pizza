@@ -7,12 +7,12 @@ interface Props {
 export const VerificationUserTemplate = ({ code }: Props): React.ReactNode => (
   <div>
     <p>
-      Код подтверждения: <h2>{code}</h2>
+      Verification code: <h2>{code}</h2>
     </p>
 
     <p>
       <a href={`http://localhost:3000/api/auth/verify?code=${code}`}>
-        Подтвердить регистрацию
+        Confirm registration
       </a>
     </p>
   </div>

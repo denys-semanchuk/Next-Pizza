@@ -26,11 +26,11 @@ function HeaderNotifications() {
     let toastMessage = '';
 
     if (searchParams.has('paid')) {
-      toastMessage = 'Заказ успешно оплачен! Информация отправлена на почту.';
+      toastMessage = 'Order successfully paid! Information sent to your email.';
     }
 
     if (searchParams.has('verified')) {
-      toastMessage = 'Почта успешно подтверждена!';
+      toastMessage = 'Email successfully verified!';
     }
 
     if (toastMessage) {
@@ -52,13 +52,13 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
   return (
     <header className={cn('border-b', className)}>
       <Container className="flex items-center justify-between py-8">
-        {/* Левая часть */}
+        {/* Left part */}
         <Link href="/">
           <div className="flex items-center gap-4">
             <Image src="/logo.png" alt="Logo" width={35} height={35} />
             <div>
               <h1 className="text-2xl uppercase font-black">Next Pizza</h1>
-              <p className="text-sm text-gray-400 leading-3">вкусней уже некуда</p>
+              <p className="text-sm text-gray-400 leading-3">it doesn&apos;t get any tastier</p>
             </div>
           </div>
         </Link>
@@ -69,7 +69,7 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
           </div>
         )}
 
-        {/* Правая часть */}
+        {/* Right part */}
         <div className="flex items-center gap-3">
           <AuthModal open={openAuthModal} onClose={() => setOpenAuthModal(false)} />
 

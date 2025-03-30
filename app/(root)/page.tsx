@@ -15,7 +15,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Get
   return (
     <>
       <Container className="mt-10">
-        <Title text="Все пиццы" size="lg" className="font-extrabold" />
+        <Title text="All Pizzas" size="lg" className="font-extrabold" />
       </Container>
 
       <TopBar categories={categories.filter((category) => category.products.length > 0)} />
@@ -23,14 +23,14 @@ export default async function Home({ searchParams }: { searchParams: Promise<Get
 
       <Container className="mt-10 pb-14">
         <div className="flex gap-[80px]">
-          {/* Фильтрация */}
+          {/* Filtering */}
           <div className="w-[250px]">
             <Suspense>
               <Filters />
             </Suspense>
           </div>
 
-          {/* Список товаров */}
+          {/* Product list */}
           <div className="flex-1">
             <div className="flex flex-col gap-16">
               {categories.map(

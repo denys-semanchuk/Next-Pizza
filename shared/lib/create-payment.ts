@@ -85,7 +85,7 @@ export async function checkPaymentAndNotify(sessionId: string): Promise<boolean>
       // Send success email only on status change
       await sendEmail(
         order.email,
-        "Next Pizza / Ваш заказ успешно оплачен 🎉",
+        "Next Pizza / Your order has been successfully paid 🎉",
         OrderSuccessTemplate({
           orderId: order.id,
           items: JSON.parse(order.items as string) as CartItemDTO[],

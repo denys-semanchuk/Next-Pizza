@@ -27,7 +27,7 @@ export interface OrderItemProps {
 
 export const OrderItem = ({ item }: { item: OrderItemProps }) => {
   const getPizzaTypeText = (type: number) => {
-    return type === 1 ? "Традиционная" : "Тонкая";
+    return type === 1 ? "Traditional" : "Thin crust";
   };
 
   return (
@@ -47,17 +47,17 @@ export const OrderItem = ({ item }: { item: OrderItemProps }) => {
             {item.productItem.product.name}
           </h3>
           <p className="font-semibold">
-            {item.productItem.price * item.quantity} ₽
+            {item.productItem.price * item.quantity} $
           </p>
         </div>
         <p className="text-gray-600 text-sm mb-2">
-          {item.productItem.size} см,{" "}
+          {item.productItem.size} cm,{" "}
           {getPizzaTypeText(item.productItem.pizzaType)}
         </p>
         {item.ingredients && item.ingredients.length > 0 && (
           <div className="mt-2">
             <p className="text-sm font-medium">
-              Дополнительные ингредиенты:
+              Additional ingredients:
             </p>
             <ul className="text-sm text-gray-600">
               {item.ingredients.map((ingredient) => (
@@ -66,14 +66,14 @@ export const OrderItem = ({ item }: { item: OrderItemProps }) => {
                   className="flex justify-between"
                 >
                   <span>{ingredient.name}</span>
-                  <span>{ingredient.price} ₽</span>
+                  <span>{ingredient.price} $</span>
                 </li>
               ))}
             </ul>
           </div>
         )}
         <div className="mt-2 text-sm text-gray-600">
-          Количество: {item.quantity}
+          Quantity: {item.quantity}
         </div>
       </div>
     </div>

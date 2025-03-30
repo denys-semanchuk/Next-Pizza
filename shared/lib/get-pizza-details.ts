@@ -10,7 +10,7 @@ export const getPizzaDetails = (
   selectedIngredients: Set<number>,
 ) => {
   const totalPrice = calcTotalPizzaPrice(type, size, items, ingredients, selectedIngredients);
-  const textDetaills = `${size} см, ${mapPizzaType[type]} pizza`;
+  const textDetaills = `${size} cm, ${mapPizzaType[type]} pizza`;
 
   return { totalPrice, textDetaills };
 };

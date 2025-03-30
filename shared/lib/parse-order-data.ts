@@ -6,7 +6,7 @@
 //   name: string;
 //   imageUrl: string;
 //   size: number;
-//   pizzaType: string; // Already converted to "Традиционная" or "Тонкая"
+//   pizzaType: string; // Already converted to "Traditional" or "Thin crust"
 //   price: number;
 //   quantity: number;
 //   ingredients: SimplifiedIngredient[];
@@ -42,7 +42,7 @@
 
 //   // Convert pizza type number to string
 //   const getPizzaTypeText = (type: number): string => {
-//     return type === 1 ? "Традиционная" : "Тонкая";
+//     return type === 1 ? "Traditional" : "Thin crust";
 //   };
 
 //   // Process each product to simplify structure
