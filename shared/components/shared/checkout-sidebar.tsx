@@ -36,7 +36,7 @@ export const CheckoutSidebar: React.FC<Props> = ({ totalAmount, loading, classNa
             Cart subtotal:
           </div>
         }
-        value={loading ? <Skeleton className="h-6 w-16 rounded-[6px]" /> : `${totalAmount} $`}
+        value={loading ? <Skeleton className="h-6 w-16 rounded-[6px]" /> : `${totalAmount.toFixed(2)} $`}
       />
       <CheckoutItemDetails
         title={
@@ -45,7 +45,7 @@ export const CheckoutSidebar: React.FC<Props> = ({ totalAmount, loading, classNa
             Taxes:
           </div>
         }
-        value={loading ? <Skeleton className="h-6 w-16 rounded-[6px]" /> : `${vatPrice} $`}
+        value={loading ? <Skeleton className="h-6 w-16 rounded-[6px]" /> : `${vatPrice.toFixed(2)} $`}
       />
       <CheckoutItemDetails
         title={
