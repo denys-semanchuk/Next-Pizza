@@ -6,7 +6,7 @@ import { Button, Skeleton } from '../ui';
 import { cn } from '@/shared/lib/utils';
 
 const VAT = 15;
-const DELIVERY_PRICE = 250;
+const DELIVERY_PRICE = 25;
 
 interface Props {
   totalAmount: number;
