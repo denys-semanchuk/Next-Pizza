@@ -1,24 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next Pizza 🍕
+
+An interactive pizza ordering platform built with Next.js 14, featuring a modern tech stack and seamless user experience.
+
+## Features
+
+- 🛒 Real-time shopping cart with persistent storage
+- 🔍 Advanced filtering and search capabilities
+- 💳 Secure payment processing with Stripe integration
+- 📱 Responsive design for all devices
+- 🔐 User authentication with email verification
+- 📦 Order tracking and history
+- 🎨 Modern UI with Tailwind CSS animations
+
+## Tech Stack
+
+- **Frontend:**
+  - Next.js 14 (App Router)
+  - React
+  - TypeScript
+  - Tailwind CSS
+  - Zustand (State Management)
+  - Lucide Icons
+
+- **Backend:**
+  - Prisma (ORM)
+  - PostgreSQL
+  - Next.js API Routes
+  - NextAuth.js
+
+- **Payment:**
+  - Stripe Integration
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
+```bash
+git clone https://github.com/denys-semanchuk/Next-Pizza
+```
 
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Set up environment variables:
+```bash
+cp .env.example .env
+```
+
+4. Set up the database:
+```bash
+npx prisma migrate dev
+```
+
+5. Run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env` file with the following variables:
+
+```env
+POSTGRES_URL=
+POSTGRES_URL_NON_POOLING=
+NEXT_PUBLIC_API_URL=/api
+RESEND_API_KEY=
+NEXT_PUBLIC_GOOGLE_PLACES_API_KEY=
+NEXT_PUBLIC_URL=
+STRIPE_SECRET_KEY=
+STRIPE_CALLBACK_URL=
+
+
+GITHUB_ID=
+GITHUB_SECRET=
+
+NEXTAUTH_SECRET=secret
+
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+```
+
+## Project Structure
+
+```
+├── app/                 # Next.js app router pages
+├── components/          # Reusable UI components
+├── lib/                 # Utility functions and helpers
+├── prisma/             # Database schema and migrations
+├── public/             # Static assets
+└── shared/             # Shared types, hooks, and store
+```
 
 ## Learn More
 
