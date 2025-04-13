@@ -1,6 +1,6 @@
 # Next Pizza 🍕
 
-An interactive pizza ordering platform built with Next.js 14, featuring a modern tech stack and seamless user experience.
+An interactive pizza ordering platform built with Next.js 15, featuring a modern tech stack and seamless user experience.
 
 ## Features
 
@@ -15,7 +15,7 @@ An interactive pizza ordering platform built with Next.js 14, featuring a modern
 ## Tech Stack
 
 - **Frontend:**
-  - Next.js 14 (App Router)
+  - Next.js 15 (App Router)
   - React
   - TypeScript
   - Tailwind CSS
