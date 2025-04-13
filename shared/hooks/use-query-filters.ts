@@ -10,23 +10,35 @@ export const useQueryFilters = (filters: Filters) => {
   React.useEffect(() => {
     if (isMounted.current) {
       const params = {
-        ...filters.prices,
+        priceFrom: filters.prices?.priceFrom,
+        priceTo: filters.prices?.priceTo,
         pizzaTypes: Array.from(filters.pizzaTypes),
         sizes: Array.from(filters.sizes),
         ingredients: Array.from(filters.selectedIngredients),
       };
 
-      const query = qs.stringify(params, {
-        arrayFormat: 'comma',
-      });
+      // Only update URL if we have actual filters
+      const hasFilters = Object.values(params).some(value => 
+        value !== undefined && 
+        (Array.isArray(value) ? value.length > 0 : true)
+      );
 
-      router.push(`?${query}`, {
+      const query = hasFilters 
+        ? qs.stringify(params, { arrayFormat: 'comma' })
+        : '';
+
+      router.push(query ? `?${query}` : '/', {
         scroll: false,
       });
-
-      console.log(filters, 999);
     }
 
     isMounted.current = true;
-  }, [filters]);
+  }, [
+    filters.prices?.priceFrom,
+    filters.prices?.priceTo,
+    filters.pizzaTypes,
+    filters.sizes,
+    filters.selectedIngredients,
+    router
+  ]);
 };
